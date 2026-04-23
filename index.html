@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日本賞楓行程 2026｜宮島 × 京都 × 大阪</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1714;
+  --ink-mute: #5a5550;
+  --ink-faint: #9a9390;
+  --paper: #faf8f4;
+  --paper-warm: #f3efe8;
+  --paper-card: #ffffff;
+  --maple: #c0392b;
+  --maple-light: #e8c4b8;
+  --maple-pale: #fdf0ed;
+  --gold: #b8860b;
+  --gold-light: #e8d5a0;
+  --gold-pale: #fdf8ec;
+  --teal: #1a6b5a;
+  --teal-light: #a8d5c8;
+  --teal-pale: #eef7f4;
+  --border: rgba(26,23,20,0.1);
+  --border-strong: rgba(26,23,20,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 64px 40px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 40px,
+    rgba(192,57,43,0.04) 40px,
+    rgba(192,57,43,0.04) 41px
+  );
+  pointer-events: none;
+}
+.hero-kana {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--maple-light);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+.hero h1 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--maple-light);
+}
+.hero-sub {
+  font-size: 14px;
+  color: rgba(250,248,244,0.55);
+  letter-spacing: 0.1em;
+  margin-bottom: 32px;
+}
+.hero-chips {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border: 0.5px solid rgba(250,248,244,0.3);
+  border-radius: 20px;
+  color: rgba(250,248,244,0.7);
+}
+
+/* ── TABS ── */
+.tab-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--paper);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0 24px;
+}
+.tab-btn {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 16px 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--ink-faint);
+  border-bottom: 2px solid transparent;
+  transition: all .2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active-a { color: var(--maple); border-bottom-color: var(--maple); }
+.tab-btn.active-b { color: var(--teal); border-bottom-color: var(--teal); }
+
+/* ── PLAN ── */
+.plan { display: none; }
+.plan.show { display: block; }
+
+/* ── OVERVIEW STRIP ── */
+.overview {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 24px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+.ov-card {
+  background: var(--paper-card);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.ov-label { font-size: 10px; letter-spacing: 0.12em; color: var(--ink-faint); margin-bottom: 6px; text-transform: uppercase; }
+.ov-val { font-family: 'Noto Serif TC', serif; font-size: 20px; font-weight: 700; color: var(--ink); }
+.ov-sub { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
+.ov-card.accent-a { border-color: var(--maple-light); background: var(--maple-pale); }
+.ov-card.accent-b { border-color: var(--teal-light); background: var(--teal-pale); }
+.ov-card.accent-a .ov-val { color: var(--maple); }
+.ov-card.accent-b .ov-val { color: var(--teal); }
+
+.plan-note {
+  max-width: 860px;
+  margin: 16px auto 0;
+  padding: 0 24px;
+}
+.note-banner {
+  font-size: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.note-banner.teal { background: var(--teal-pale); color: var(--teal); border: 0.5px solid var(--teal-light); }
+.note-banner.maple { background: var(--maple-pale); color: var(--maple); border: 0.5px solid var(--maple-light); }
+
+/* ── DAYS ── */
+.days {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 24px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.day-card {
+  background: var(--paper-card);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.day-card:hover { box-shadow: 0 4px 20px rgba(26,23,20,0.07); }
+
+.day-hd {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 18px;
+  border-bottom: 0.5px solid var(--border);
+  flex-wrap: wrap;
+}
+.day-date {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  min-width: 80px;
+}
+.day-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  font-weight: 500;
+  flex: 1;
+  color: var(--ink);
+}
+.tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.tag {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 12px;
+  letter-spacing: 0.04em;
+}
+.t-h { background: #fef3e2; color: #92400e; }
+.t-m { background: #ecfdf5; color: #065f46; }
+.t-k { background: #ede9fe; color: #4c1d95; }
+.t-o { background: #fef2f2; color: #991b1b; }
+.t-u { background: #f0fdf4; color: #14532d; }
+
+.day-body {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.spots {
+  flex: 2;
+  min-width: 220px;
+  padding: 14px 18px;
+  border-right: 0.5px solid var(--border);
+}
+.spot {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+  align-items: flex-start;
+}
+.spot:last-child { margin-bottom: 0; }
+.spot-ic { font-size: 14px; flex-shrink: 0; width: 18px; margin-top: 1px; }
+.spot-tx { font-size: 12.5px; color: var(--ink); line-height: 1.55; }
+.spot-sub { font-size: 11px; color: var(--ink-mute); margin-top: 1px; }
+
+.badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.badge.leaf { background: #f0fdf4; color: #14532d; border: 0.5px solid #86efac; }
+.badge.warn { background: #fffbeb; color: #92400e; border: 0.5px solid #fcd34d; }
+.badge.info { background: #eff6ff; color: #1e40af; border: 0.5px solid #93c5fd; }
+
+.right-col {
+  flex: 1;
+  min-width: 150px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.hotel-box {
+  background: var(--paper-warm);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.hotel-lbl { font-size: 10px; letter-spacing: 0.1em; color: var(--ink-faint); margin-bottom: 4px; text-transform: uppercase; }
+.hotel-name { font-size: 12px; font-weight: 500; color: var(--ink); }
+.hotel-sub { font-size: 11px; color: var(--ink-mute); margin-top: 2px; }
+.hotel-box.star { background: var(--gold-pale); border: 0.5px solid var(--gold-light); }
+.hotel-box.star .hotel-name { color: var(--gold); }
+
+/* ── COST TABLE ── */
+.cost-section {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+.cost-card {
+  background: var(--paper-card);
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.cost-hd {
+  padding: 14px 20px;
+  background: var(--paper-warm);
+  border-bottom: 0.5px solid var(--border);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+}
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 11px 20px;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 13px;
+  color: var(--ink-mute);
+  gap: 12px;
+}
+.cost-row span:last-child { font-weight: 500; color: var(--ink); white-space: nowrap; }
+.cost-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  gap: 12px;
+}
+.cost-total span:last-child { font-family: 'Noto Serif TC', serif; font-size: 18px; }
+.cost-total.a span:last-child { color: var(--maple); }
+.cost-total.b span:last-child { color: var(--teal); }
+.cost-note {
+  padding: 10px 20px;
+  font-size: 11px;
+  color: var(--ink-faint);
+  border-top: 0.5px solid var(--border);
+  background: var(--paper-warm);
+}
+
+/* ── ALERTS ── */
+.alert-section {
+  max-width: 860px;
+  margin: 0 auto 0;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.alert {
+  font-size: 12px;
+  padding: 11px 16px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.6;
+}
+.alert.red { background: var(--maple-pale); border: 0.5px solid var(--maple-light); color: #7f1d1d; }
+.alert.yellow { background: var(--gold-pale); border: 0.5px solid var(--gold-light); color: #78350f; }
+.alert.green { background: var(--teal-pale); border: 0.5px solid var(--teal-light); color: #064e3b; }
+.alert-ic { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 11px;
+  color: var(--ink-faint);
+  border-top: 0.5px solid var(--border);
+  letter-spacing: 0.08em;
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-kana">Autumn Foliage Journey · November 2026</div>
+  <h1>日本賞楓<em>九日</em>行程</h1>
+  <div class="hero-sub">宮島 × 京都 × 大阪｜11/25 – 12/3</div>
+  <div class="hero-chips">
+    <span class="chip">2人同行</span>
+    <span class="chip">JR Pass 7日券</span>
+    <span class="chip">CI156 去程 · CI153 回程</span>
+    <span class="chip">方案A / 方案B 兩種規劃</span>
+  </div>
+</header>
+
+<nav class="tab-wrap">
+  <button class="tab-btn active-a" id="tab-a" onclick="show('a')">方案 A｜宮島 3 晚</button>
+  <button class="tab-btn" id="tab-b" onclick="show('b')">方案 B｜宮島 2 晚（推薦）</button>
+</nav>
+
+<!-- ═══ PLAN A ═══ -->
+<div class="plan show" id="plan-a">
+
+  <div class="overview">
+    <div class="ov-card accent-a">
+      <div class="ov-label">宮島 星野界</div>
+      <div class="ov-val">3 晚</div>
+      <div class="ov-sub">11/25–11/27 含早晚餐</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">京都 OMO5</div>
+      <div class="ov-val">2 晚</div>
+      <div class="ov-sub">11/28–11/30 有廚房</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">大阪 OMO7</div>
+      <div class="ov-val">2 晚</div>
+      <div class="ov-sub">11/30–12/3</div>
+    </div>
+    <div class="ov-card accent-a">
+      <div class="ov-label">住宿總計（2人）</div>
+      <div class="ov-val">¥377,898</div>
+      <div class="ov-sub">約 NT$83,100</div>
+    </div>
+  </div>
+
+  <div class="plan-note">
+    <div class="note-banner maple">★ 宮島非常從容，但京都僅 2 晚，嵐山需在大阪日殺回京都</div>
+  </div>
+
+  <div class="days">
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/25 Day 1</span>
+        <span class="day-title">抵達關西 → 廣島 → 界宮島 Check-in</span>
+        <div class="tags"><span class="tag t-h">廣島</span><span class="tag t-m">宮島</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">✈️</span><div><div class="spot-tx">CI156 08:05 TPE → 11:35 KIX 落地，出關約 12:30</div></div></div>
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">新幹線 KIX → 廣島約 13:45 抵</div><div class="spot-sub">JR Pass 可用，建議提前指定席</div></div></div>
+          <div class="spot"><span class="spot-ic">🕊️</span><div><div class="spot-tx">和平紀念公園 + 資料館</div><div class="spot-sub">約 14:00–16:30，資料館預留 1.5 小時</div></div></div>
+          <div class="spot"><span class="spot-ic">🏨</span><div><div class="spot-tx">界宮島 Check-in（宮島口側，無需搭船）</div><div class="spot-sub">約 17:00 抵達，享用晚餐</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box star">
+            <div class="hotel-lbl">住宿 1／3</div>
+            <div class="hotel-name">星野界 宮島</div>
+            <div class="hotel-sub">含早晚餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/26 Day 2</span>
+        <span class="day-title">宮島：嚴島神社 + 紅葉谷公園夜楓</span>
+        <div class="tags"><span class="tag t-m">宮島</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">⛴️</span><div><div class="spot-tx">搭 JR 渡輪入島（JR Pass 免費）</div><div class="spot-sub">確認當日潮汐時間，漲潮大鳥居最美</div></div></div>
+          <div class="spot"><span class="spot-ic">⛩️</span><div><div class="spot-tx">嚴島神社 + 五重塔 + 表參道</div></div></div>
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">紅葉谷公園散步</div><div class="spot-sub">700 株楓樹，溪流 × 紅葉橋</div></div></div>
+          <div class="spot"><span class="spot-ic">🌙</span><div><div class="spot-tx">紅葉谷公園夜間燈光（日落–21:00）</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 11/26 楓葉見頃高峰</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box star">
+            <div class="hotel-lbl">住宿 2／3</div>
+            <div class="hotel-name">星野界 宮島</div>
+            <div class="hotel-sub">含早晚餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/27 Day 3</span>
+        <span class="day-title">宮島：彌山健行 + 大聖院</span>
+        <div class="tags"><span class="tag t-m">宮島</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">⛴️</span><div><div class="spot-tx">早上搭渡輪入島</div></div></div>
+          <div class="spot"><span class="spot-ic">🏔️</span><div><div class="spot-tx">彌山纜車 + 健行至山頂展望台</div><div class="spot-sub">瀬戸內海全景，約 3–4 小時</div></div></div>
+          <div class="spot"><span class="spot-ic">🛕</span><div><div class="spot-tx">大聖院（宮島最古老寺院）</div></div></div>
+          <div class="spot"><span class="spot-ic">🌙</span><div><div class="spot-tx">再訪紅葉谷公園夜楓</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box star">
+            <div class="hotel-lbl">住宿 3／3</div>
+            <div class="hotel-name">星野界 宮島</div>
+            <div class="hotel-sub">含早晚餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/28 Day 4</span>
+        <span class="day-title">退房 → 京都：金閣寺 + 源光庵 + 嵐山</span>
+        <div class="tags"><span class="tag t-k">京都</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">界宮島退房 → 新幹線 → 京都</div><div class="spot-sub">寄行李後直接出發</div></div></div>
+          <div class="spot"><span class="spot-ic">🏯</span><div><div class="spot-tx">金閣寺（抵達即去，早上人少）</div></div></div>
+          <div class="spot"><span class="spot-ic">🪟</span><div><div class="spot-tx">源光庵（悟之窗 + 迷之窗）</div><div class="spot-sub">金閣寺附近，必訪</div></div></div>
+          <div class="spot"><span class="spot-ic">🏨</span><div><div class="spot-tx">OMO5 京都 Check-in → 嵐山散步</div><div class="spot-sub">渡月橋 + 天龍寺 + 嵯峨野竹林</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 嵐山楓葉 11月中旬–12月上旬</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 1／2</div>
+            <div class="hotel-name">OMO5 京都</div>
+            <div class="hotel-sub">有廚房，無餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/29 Day 5</span>
+        <span class="day-title">宇治：任天堂博物館 + 平等院 + 東福寺</span>
+        <div class="tags"><span class="tag t-u">宇治</span><span class="tag t-k">京都</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🎮</span><div><div class="spot-tx">任天堂博物館</div><div class="spot-sub">需提前搶票！11/1 搶 11 月票，每月 1 日開放</div></div></div>
+          <div class="spot"><span class="spot-ic">🏛️</span><div><div class="spot-tx">平等院鳳凰堂（世界遺產）</div><div class="spot-sub">楓葉見頃 11 月下旬，10 元硬幣圖案</div></div></div>
+          <div class="spot"><span class="spot-ic">⛩️</span><div><div class="spot-tx">宇治上神社</div></div></div>
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">東福寺（回程順路）</div><div class="spot-sub">京都最壯觀楓葉規模之一</div></div></div>
+          <div class="badges">
+            <span class="badge warn">⚠️ 任天堂約需 3–4 小時，東福寺視時間彈性</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 2／2</div>
+            <div class="hotel-name">OMO5 京都</div>
+            <div class="hotel-sub">有廚房，無餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/30 Day 6</span>
+        <span class="day-title">清水寺 + 御苑 + 永観堂 + 哲學之道 → 大阪</span>
+        <div class="tags"><span class="tag t-k">京都</span><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🏔️</span><div><div class="spot-tx">清水寺（06:00 開門早去）</div><div class="spot-sub">高台寺 + 二寧坂順遊</div></div></div>
+          <div class="spot"><span class="spot-ic">🌳</span><div><div class="spot-tx">京都御苑（免費）</div><div class="spot-sub">見頃 11 月下旬–12 月上旬</div></div></div>
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">永観堂（3,000 棵楓樹，京都頂級）</div></div></div>
+          <div class="spot"><span class="spot-ic">🚶</span><div><div class="spot-tx">哲學之道（11/30 正值高峰）</div></div></div>
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">傍晚新幹線 → 大阪，OMO7 Check-in</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 今日楓葉全程見頃</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 1／2</div>
+            <div class="hotel-name">OMO7 大阪</div>
+            <div class="hotel-sub">不含餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/1 Day 7</span>
+        <span class="day-title">醍醐寺 → 大阪城 + 環球影城（半天）</span>
+        <div class="tags"><span class="tag t-k">京都</span><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">⛩️</span><div><div class="spot-tx">醍醐寺（早上，京都東南）</div><div class="spot-sub">三寶院庭園楓葉，完畢直接往大阪</div></div></div>
+          <div class="spot"><span class="spot-ic">🏯</span><div><div class="spot-tx">大阪城公園</div><div class="spot-sub">12 月初楓葉尾聲，天守閣 ¥600</div></div></div>
+          <div class="spot"><span class="spot-ic">🎢</span><div><div class="spot-tx">環球影城（傍晚半天場入場）</div><div class="spot-sub">建議傍晚場避開人潮</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 2／2</div>
+            <div class="hotel-name">OMO7 大阪</div>
+            <div class="hotel-sub">不含餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/2 Day 8</span>
+        <span class="day-title">箕面瀑布 + 萬博紀念公園 + 道頓堀</span>
+        <div class="tags"><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">箕面公園 + 箕面大瀑布</div><div class="spot-sub">市區搭阪急電車約 30 分，有夜間點燈</div></div></div>
+          <div class="spot"><span class="spot-ic">☀️</span><div><div class="spot-tx">萬博紀念公園（太陽之塔）</div><div class="spot-sub">與箕面同側可串聯，日本庭園楓葉美</div></div></div>
+          <div class="spot"><span class="spot-ic">🍜</span><div><div class="spot-tx">道頓堀美食收尾</div></div></div>
+          <div class="badges">
+            <span class="badge info">ℹ️ 今日 OMO7 寄放行李</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box" style="background:#fef2f2;border:0.5px solid #fca5a5;">
+            <div class="hotel-lbl" style="color:#991b1b;">注意</div>
+            <div class="hotel-name" style="color:#991b1b;">今日 OMO7 退房</div>
+            <div class="hotel-sub">行李寄放前台</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/3 Day 9</span>
+        <span class="day-title">退房 → 關西機場 → 台北</span>
+        <div class="tags"><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🧳</span><div><div class="spot-tx">OMO7 退房，難波搭南海電鐵 → KIX</div><div class="spot-sub">約 40 分鐘，建議 10:30 前到機場</div></div></div>
+          <div class="spot"><span class="spot-ic">✈️</span><div><div class="spot-tx">CI153 14:30 KIX → 16:45 TPE</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert-section">
+    <div class="alert red"><span class="alert-ic">🎮</span><span><strong>任天堂博物館</strong>：需提前搶票！每月 1 日開放下個月名額，11 月 1 日當天準時上官網，非常秒殺。</span></div>
+    <div class="alert yellow"><span class="alert-ic">⛴️</span><span><strong>JR 渡輪</strong>：宮島渡輪分 JR 和松大汽船兩家，JR Pass 只免 JR 渡輪，注意搭乘正確那班。</span></div>
+    <div class="alert yellow"><span class="alert-ic">🌊</span><span><strong>宮島潮汐</strong>：嚴島神社大鳥居漲潮時在水中最美，退潮可步行至鳥居下，兩種景觀各有特色，可在入住後確認隔日潮汐。</span></div>
+  </div>
+
+  <div class="cost-section" style="margin-top:24px;">
+    <div class="cost-card">
+      <div class="cost-hd">住宿費用明細（2 人）</div>
+      <div class="cost-row"><span>星野界 宮島 3 晚（含早晚餐）</span><span>¥250,260 ≈ NT$55,057</span></div>
+      <div class="cost-row"><span>OMO5 京都 2 晚（有廚房，無餐）</span><span>¥90,910 ≈ NT$19,900</span></div>
+      <div class="cost-row"><span>OMO7 大阪 2 晚（不含餐）</span><span>¥36,728 ≈ NT$8,080</span></div>
+      <div class="cost-total a"><span>住宿合計</span><span>¥377,898 ≈ NT$83,100</span></div>
+      <div class="cost-note">每人均攤約 NT$41,550｜匯率 1 JPY ≈ 0.22 TWD｜不含機票、JR Pass、餐費、門票</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══ PLAN B ═══ -->
+<div class="plan" id="plan-b">
+
+  <div class="overview">
+    <div class="ov-card accent-b">
+      <div class="ov-label">宮島 星野界</div>
+      <div class="ov-val">2 晚</div>
+      <div class="ov-sub">11/25–11/26 含早晚餐</div>
+    </div>
+    <div class="ov-card accent-b">
+      <div class="ov-label">京都 OMO5</div>
+      <div class="ov-val">3 晚</div>
+      <div class="ov-sub">11/27–11/30 有廚房</div>
+    </div>
+    <div class="ov-card">
+      <div class="ov-label">大阪 OMO7</div>
+      <div class="ov-val">2 晚</div>
+      <div class="ov-sub">11/30–12/3</div>
+    </div>
+    <div class="ov-card accent-b">
+      <div class="ov-label">住宿總計（2人）</div>
+      <div class="ov-val">¥334,760</div>
+      <div class="ov-sub">約 NT$73,600，省 NT$9,500</div>
+    </div>
+  </div>
+
+  <div class="plan-note">
+    <div class="note-banner teal">★ 推薦方案：京都多一整天，所有景點從容安排，住宿費用更省</div>
+  </div>
+
+  <div class="days">
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/25 Day 1</span>
+        <span class="day-title">抵達關西 → 廣島 → 界宮島 Check-in</span>
+        <div class="tags"><span class="tag t-h">廣島</span><span class="tag t-m">宮島</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">✈️</span><div><div class="spot-tx">CI156 08:05 TPE → 11:35 KIX 落地，出關約 12:30</div></div></div>
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">新幹線 KIX → 廣島約 13:45 抵</div><div class="spot-sub">JR Pass 可用，建議提前指定席</div></div></div>
+          <div class="spot"><span class="spot-ic">🕊️</span><div><div class="spot-tx">和平紀念公園 + 資料館</div><div class="spot-sub">約 14:00–16:30</div></div></div>
+          <div class="spot"><span class="spot-ic">🏨</span><div><div class="spot-tx">界宮島 Check-in（宮島口側，無需搭船）</div><div class="spot-sub">約 17:00 抵達，享用晚餐</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box star">
+            <div class="hotel-lbl">住宿 1／2</div>
+            <div class="hotel-name">星野界 宮島</div>
+            <div class="hotel-sub">含早晚餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/26 Day 2</span>
+        <span class="day-title">宮島：嚴島神社 + 彌山健行 + 夜楓</span>
+        <div class="tags"><span class="tag t-m">宮島</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">⛴️</span><div><div class="spot-tx">搭 JR 渡輪入島，確認潮汐時間</div></div></div>
+          <div class="spot"><span class="spot-ic">⛩️</span><div><div class="spot-tx">嚴島神社 + 五重塔 + 表參道（早上先去）</div></div></div>
+          <div class="spot"><span class="spot-ic">🏔️</span><div><div class="spot-tx">彌山纜車 + 健行至山頂（約 3 小時）</div></div></div>
+          <div class="spot"><span class="spot-ic">🌙</span><div><div class="spot-tx">紅葉谷公園夜間燈光（日落–21:00）</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 11/26 楓葉見頃高峰</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box star">
+            <div class="hotel-lbl">住宿 2／2</div>
+            <div class="hotel-name">星野界 宮島</div>
+            <div class="hotel-sub">含早晚餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/27 Day 3</span>
+        <span class="day-title">宮島退房 → 京都：嵐山</span>
+        <div class="tags"><span class="tag t-m">宮島</span><span class="tag t-k">京都</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🌅</span><div><div class="spot-tx">早上大聖院 + 紅葉谷公園晨遊</div><div class="spot-sub">退房前輕鬆走，享用早餐</div></div></div>
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">界宮島退房 → 新幹線 → 京都</div><div class="spot-sub">寄行李後直接嵐山</div></div></div>
+          <div class="spot"><span class="spot-ic">🌉</span><div><div class="spot-tx">渡月橋 + 天龍寺 + 嵯峨野竹林</div></div></div>
+          <div class="spot"><span class="spot-ic">🏨</span><div><div class="spot-tx">OMO5 京都 Check-in</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 嵐山楓葉 11月中旬–12月上旬</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 1／3</div>
+            <div class="hotel-name">OMO5 京都</div>
+            <div class="hotel-sub">有廚房，無早餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/28 Day 4</span>
+        <span class="day-title">金閣寺 + 源光庵 + 宇治任天堂 + 平等院</span>
+        <div class="tags"><span class="tag t-k">京都</span><span class="tag t-u">宇治</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🏯</span><div><div class="spot-tx">金閣寺（早上開門即去）</div></div></div>
+          <div class="spot"><span class="spot-ic">🪟</span><div><div class="spot-tx">源光庵（悟之窗 + 迷之窗）</div></div></div>
+          <div class="spot"><span class="spot-ic">🎮</span><div><div class="spot-tx">任天堂博物館（宇治，約 3–4 小時）</div><div class="spot-sub">需提前搶票！11/1 搶 11 月票</div></div></div>
+          <div class="spot"><span class="spot-ic">🏛️</span><div><div class="spot-tx">平等院鳳凰堂 + 宇治上神社</div></div></div>
+          <div class="badges">
+            <span class="badge warn">⚠️ 任天堂 + 平等院同天較緊，可視狀況調整</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 2／3</div>
+            <div class="hotel-name">OMO5 京都</div>
+            <div class="hotel-sub">有廚房，無早餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/29 Day 5</span>
+        <span class="day-title">清水寺 + 京都御苑 + 永観堂 + 哲學之道</span>
+        <div class="tags"><span class="tag t-k">京都</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🏔️</span><div><div class="spot-tx">清水寺（06:00 開門早去）</div><div class="spot-sub">高台寺 + 二寧坂順遊</div></div></div>
+          <div class="spot"><span class="spot-ic">🌳</span><div><div class="spot-tx">京都御苑（免費）</div><div class="spot-sub">見頃 11 月下旬–12 月上旬</div></div></div>
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">永観堂（3,000 棵楓樹，京都頂級）</div></div></div>
+          <div class="spot"><span class="spot-ic">🚶</span><div><div class="spot-tx">哲學之道（11/29 見頃高峰）</div></div></div>
+          <div class="badges">
+            <span class="badge leaf">🍁 今日楓葉全程見頃</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 3／3</div>
+            <div class="hotel-name">OMO5 京都</div>
+            <div class="hotel-sub">有廚房，無早餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">11/30 Day 6</span>
+        <span class="day-title">醍醐寺 → 大阪城 + 道頓堀</span>
+        <div class="tags"><span class="tag t-k">京都</span><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">⛩️</span><div><div class="spot-tx">醍醐寺（退房後帶行李去，再往大阪）</div><div class="spot-sub">三寶院庭園楓葉</div></div></div>
+          <div class="spot"><span class="spot-ic">🚄</span><div><div class="spot-tx">新幹線 → 大阪，OMO7 Check-in</div></div></div>
+          <div class="spot"><span class="spot-ic">🏯</span><div><div class="spot-tx">大阪城公園</div><div class="spot-sub">12 月初楓葉尾聲，天守閣 ¥600</div></div></div>
+          <div class="spot"><span class="spot-ic">🍜</span><div><div class="spot-tx">道頓堀 + 心齋橋夜遊</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 1／2</div>
+            <div class="hotel-name">OMO7 大阪</div>
+            <div class="hotel-sub">不含餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/1 Day 7</span>
+        <span class="day-title">東福寺 + 箕面瀑布 + 環球影城（半天）</span>
+        <div class="tags"><span class="tag t-k">京都</span><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🍁</span><div><div class="spot-tx">東福寺（早上殺去京都）</div><div class="spot-sub">京都最壯觀楓葉，早去避人潮</div></div></div>
+          <div class="spot"><span class="spot-ic">🌊</span><div><div class="spot-tx">箕面公園 + 箕面大瀑布</div><div class="spot-sub">阪急電車約 30 分，有夜間點燈</div></div></div>
+          <div class="spot"><span class="spot-ic">🎢</span><div><div class="spot-tx">環球影城（傍晚半天）</div></div></div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box">
+            <div class="hotel-lbl">住宿 2／2</div>
+            <div class="hotel-name">OMO7 大阪</div>
+            <div class="hotel-sub">不含餐</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/2 Day 8</span>
+        <span class="day-title">萬博紀念公園 + 心齋橋掃貨</span>
+        <div class="tags"><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">☀️</span><div><div class="spot-tx">萬博紀念公園（太陽之塔）</div><div class="spot-sub">日本庭園楓葉，12 月初見頃</div></div></div>
+          <div class="spot"><span class="spot-ic">🛒</span><div><div class="spot-tx">心齋橋 + 難波掃貨</div></div></div>
+          <div class="spot"><span class="spot-ic">🍣</span><div><div class="spot-tx">最後晚餐，輕鬆收尾</div></div></div>
+          <div class="badges">
+            <span class="badge info">ℹ️ 今日 OMO7 退房，行李寄放前台</span>
+          </div>
+        </div>
+        <div class="right-col">
+          <div class="hotel-box" style="background:#fef2f2;border:0.5px solid #fca5a5;">
+            <div class="hotel-lbl" style="color:#991b1b;">注意</div>
+            <div class="hotel-name" style="color:#991b1b;">今日 OMO7 退房</div>
+            <div class="hotel-sub">行李寄放前台</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card">
+      <div class="day-hd">
+        <span class="day-date">12/3 Day 9</span>
+        <span class="day-title">退房 → 關西機場 → 台北</span>
+        <div class="tags"><span class="tag t-o">大阪</span></div>
+      </div>
+      <div class="day-body">
+        <div class="spots">
+          <div class="spot"><span class="spot-ic">🧳</span><div><div class="spot-tx">OMO7 退房，難波搭南海電鐵 → KIX</div><div class="spot-sub">約 40 分鐘，建議 10:30 前到機場</div></div></div>
+          <div class="spot"><span class="spot-ic">✈️</span><div><div class="spot-tx">CI153 14:30 KIX → 16:45 TPE</div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="alert-section">
+    <div class="alert red"><span class="alert-ic">🎮</span><span><strong>任天堂博物館</strong>：需提前搶票！每月 1 日開放下個月名額，11 月 1 日當天準時上官網，非常秒殺。</span></div>
+    <div class="alert yellow"><span class="alert-ic">⛴️</span><span><strong>JR 渡輪</strong>：宮島渡輪分 JR 和松大汽船兩家，JR Pass 只免 JR 渡輪，注意搭乘正確那班。</span></div>
+    <div class="alert yellow"><span class="alert-ic">🌊</span><span><strong>宮島潮汐</strong>：嚴島神社大鳥居漲潮在水中最美，退潮可步行至鳥居下，入住後確認隔日潮汐時間。</span></div>
+    <div class="alert green"><span class="alert-ic">💡</span><span><strong>OMO5 有廚房</strong>：可在附近超市採買，自己準備早餐，省下京都三天早餐費用。</span></div>
+  </div>
+
+  <div class="cost-section" style="margin-top:24px;">
+    <div class="cost-card">
+      <div class="cost-hd">住宿費用明細（2 人）</div>
+      <div class="cost-row"><span>星野界 宮島 2 晚（含早晚餐）</span><span>¥163,320 ≈ NT$35,930</span></div>
+      <div class="cost-row"><span>OMO5 京都 3 晚（有廚房，無早餐）</span><span>¥134,712 ≈ NT$29,640</span></div>
+      <div class="cost-row"><span>OMO7 大阪 2 晚（不含餐）</span><span>¥36,728 ≈ NT$8,080</span></div>
+      <div class="cost-total b"><span>住宿合計</span><span>¥334,760 ≈ NT$73,600</span></div>
+      <div class="cost-note">每人均攤約 NT$36,800｜比方案A 省約 NT$9,500｜匯率 1 JPY ≈ 0.22 TWD｜不含機票、JR Pass、餐費、門票</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  日本賞楓行程 2026｜11/25 – 12/3｜2 人同行<br>
+  CI156 去程 · CI153 回程｜JR Pass 7 日券｜¥ = 日圓｜NT$ = 台幣
+</footer>
+
+<script>
+function show(p) {
+  document.getElementById('plan-a').classList.remove('show');
+  document.getElementById('plan-b').classList.remove('show');
+  document.getElementById('plan-' + p).classList.add('show');
+  document.getElementById('tab-a').className = 'tab-btn' + (p === 'a' ? ' active-a' : '');
+  document.getElementById('tab-b').className = 'tab-btn' + (p === 'b' ? ' active-b' : '');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

@@ -544,6 +544,7 @@ const WHOKEY = 'hida2026:who';
 
 let syncState = CLOUD_ON ? 'idle' : 'local';
 let _pushTimer = null;
+let pendingPush = false;
 
 let S;
 try{
@@ -555,6 +556,7 @@ if(!S.travelers) S.travelers = ['Caroline','旅伴'];
 function save(skipCloud){
   try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
   if(CLOUD_ON && !skipCloud){
+    pendingPush = true;
     syncState = 'pending';
     clearTimeout(_pushTimer);
     _pushTimer = setTimeout(cloudPush, 1000);
@@ -566,6 +568,7 @@ let lastSyncError = '';
 
 async function cloudPull(silent){
   if(!CLOUD_ON) return;
+  if(pendingPush){ return; } // 本機還有尚未推送的變更，暫緩抓取雲端資料以免互相覆蓋
   syncState = 'syncing'; updateSyncBadge();
   try{
     const res = await fetch('https://api.jsonbin.io/v3/b/'+JSONBIN_ID+'/latest', {
@@ -577,7 +580,7 @@ async function cloudPull(silent){
     }
     const json = await res.json();
     const remote = json.record;
-    if(remote && remote.days){
+    if(remote && remote.days && !pendingPush){
       S = remote;
       if(!S.travelers) S.travelers = ['Caroline','旅伴'];
       save(true);
@@ -606,11 +609,15 @@ async function cloudPush(){
       const body = await res.text().catch(()=> '');
       throw new Error('HTTP '+res.status+(body?('　'+body.slice(0,140)):''));
     }
+    pendingPush = false;
     syncState = 'synced'; lastSyncError = '';
   }catch(e){
     syncState = 'error';
     lastSyncError = (e && e.message) ? e.message : String(e);
     console.error('cloudPush error:', e);
+    // 推送失敗仍保留 pendingPush，避免背景拉取蓋掉這筆還沒送出去的變更，並排程重試
+    clearTimeout(_pushTimer);
+    _pushTimer = setTimeout(cloudPush, 5000);
   }
   updateSyncBadge();
 }
